@@ -1,57 +1,21 @@
+[project]
+name = "livekit-custom"
+version = "0.0.1"
+description = "Local editable setup for LiveKit Agents + Plugins"
+requires-python = ">=3.9"
+
 [tool.uv]
 constraint-dependencies = ['onnxruntime<1.20.0; python_version == "3.9"']
 
 [tool.uv.sources]
-livekit-agents = { workspace = true }
-livekit-plugins-anam = { workspace = true }
-livekit-plugins-anthropic = { workspace = true }
-livekit-plugins-assemblyai = { workspace = true }
-livekit-plugins-aws = { workspace = true }
-livekit-plugins-azure = { workspace = true }
-livekit-plugins-baseten = { workspace = true }
-livekit-plugins-bey = { workspace = true }
-livekit-plugins-bithuman = { workspace = true }
-livekit-plugins-cartesia = { workspace = true }
-livekit-plugins-clova = { workspace = true }
-livekit-plugins-deepgram = { workspace = true }
-livekit-plugins-elevenlabs = { workspace = true }
-livekit-plugins-fal = { workspace = true }
-livekit-plugins-fireworksai = { workspace = true }
-livekit-plugins-fishaudio = { workspace = true }
-livekit-plugins-gladia = { workspace = true }
-livekit-plugins-google = { workspace = true }
-livekit-plugins-groq = { workspace = true }
-livekit-plugins-hedra = { workspace = true }
-livekit-plugins-hume = { workspace = true }
-livekit-plugins-inworld = { workspace = true }
-livekit-plugins-langchain = { workspace = true }
-livekit-plugins-lmnt = { workspace = true }
-livekit-plugins-minimax-ai = { workspace = true }
-livekit-plugins-mistralai = { workspace = true }
-livekit-plugins-neuphonic = { workspace = true }
-livekit-plugins-nltk = { workspace = true }
-livekit-plugins-nvidia = { workspace = true }
-livekit-plugins-openai = { workspace = true }
-livekit-plugins-resemble = { workspace = true }
-livekit-plugins-rime = { workspace = true }
-livekit-plugins-sarvam = { workspace = true }
-livekit-plugins-silero = { workspace = true }
-livekit-plugins-simli = { workspace = true }
-livekit-plugins-smallestai = { workspace = true }
-livekit-plugins-soniox = { workspace = true }
-livekit-plugins-speechify = { workspace = true }
-livekit-plugins-speechmatics = { workspace = true }
-livekit-plugins-spitch = { workspace = true }
-livekit-plugins-tavus = { workspace = true }
-livekit-plugins-turn-detector = { workspace = true }
-livekit-plugins-ultravox = { workspace = true }
-livekit-plugins-upliftai = { workspace = true }
+livekit_agents = { workspace = true }
+livekit_plugins = { workspace = true }
 
 [tool.uv.workspace]
-members = ["livekit-plugins/*", "livekit-agents"]
+members = ["livekit_plugins/*", "livekit_agents"]
 exclude = [
-    "livekit-plugins/livekit-plugins-browser",
-    "livekit-plugins/livekit-blingfire",
+    "livekit_plugins/livekit-plugins-browser",
+    "livekit_plugins/livekit-blingfire",
 ]
 
 [dependency-groups]
@@ -74,13 +38,13 @@ exclude = [".github"]
 
 [tool.ruff.lint]
 select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "I",  # isort
-    "B",  # flake8-bugbear
-    "C4", # flake8-comprehensions
-    "UP", # pyupgrade
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
 ]
 ignore = ["E501"]
 
@@ -91,12 +55,10 @@ known-first-party = ["livekit"]
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 addopts = ["--import-mode=importlib", "--ignore=examples"]
-
 
 [tool.mypy]
 strict = true
@@ -131,3 +93,7 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "speechmatics.*"
 follow_untyped_imports = true
+
+# ✅ Tell setuptools about both main packages
+[tool.setuptools]
+packages = ["livekit_agents", "livekit_plugins"]
